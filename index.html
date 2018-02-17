@@ -4,7 +4,52 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        body {
+            text-align: center;
+        }
 
+        .card {
+            width: 200px;
+            box-shadow: 0 0 10px #369;
+            margin: 10px;
+            display: inline-block;
+
+        }
+
+        .photo {
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            margin: 15px auto;
+        }
+
+        .gallary_list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .name {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .button {
+            width: 30px;
+            height: 30px;
+            background: url("http://s1.iconbird.com/ico/0612/GooglePlusInterfaceIcons/w128h1281338911337cross.png");
+            background-size: cover;
+            float: right;
+        }
+
+        li {
+            display: inline;
+        }
+
+        .form {
+            text-align: left;
+        }
     </style>
     <script>
 
@@ -13,20 +58,21 @@
             this.photo = url;
         }
 
-        gallaryCard.prototype.toCard = function () {
+        gallaryCard.prototype.toElement = function () {
             var div = document.createElement("DIV");
             var name = document.createElement("P");
             var photo = document.createElement("DIV");
             var but = document.createElement("BUTTON");
 
-            div.className("card");
-            name.className("name");
-            photo.className("photo");
-            but.className("button");
+            div.className = "card";
+            name.className = "name";
+            photo.className = "photo";
+            but.className = "button";
 
             name.appendChild(document.createTextNode(this.name));
 
             photo.style.backgroundImage = "url('" + this.photo + "')";
+
 
             div.appendChild(photo);
             div.appendChild(name);
@@ -67,11 +113,14 @@
 
 </head>
 <body>
+<div class="form">
+    <label for="name">Name: </label>
+    <input type="text" id="name">
+    <label for="url">Photo: </label>
+    <input type="text" id="url">
+    <button onclick="page.addCard()">ADD</button>
+</div>
 
-<!--hello-->
-<input type="text" id="name">
-<input type="text" id="url">
-<button onclick="page.addCard()">ADD</button>
 <ul class="gallary_list"></ul>
 </body>
 </html>
