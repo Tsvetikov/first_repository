@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+    <script>
+
+        function gallaryCard(name, url) {
+            this.name = name;
+            this.photo = url;
+        }
+
+        gallaryCard.prototype.toCard = function () {
+            var div = document.createElement("DIV");
+            var name = document.createElement("P");
+            var photo = document.createElement("DIV");
+            var but = document.createElement("BUTTON");
+
+            div.className("card");
+            name.className("name");
+            photo.className("photo");
+            but.className("button");
+
+            name.appendChild(document.createTextNode(this.name));
+
+            photo.style.backgroundImage = "url('" + this.photo + "')";
+
+            div.appendChild(photo);
+            div.appendChild(name);
+            div.appendChild(but);
+
+            return div;
+        };
+
+        var page = {
+            cards: [],
+            init: function () {
+                this.nameInput = document.querySelector("#name");
+                this.urlInput = document.querySelector("#url");
+                this.gallary = document.querySelector(".gallary_list");
+            },
+            addCard: function () {
+                this.cards.push(new gallaryCard(
+                    this.nameInput.value,
+                    this.urlInput.value
+                ));
+                this.clearing();
+            },
+            clearing: function () {
+                this.gallary.innerHTML = "";
+                this.cards.forEach(function (elem) {
+                    var li = document.createElement("LI");
+                    li.appendChild(elem.toElement());
+                    this.gallary.appendChild(li);
+                }.bind(this))
+            }
+        };
+
+
+        window.onload = function () {
+            page.init();
+        };
+    </script>
+
+</head>
+<body>
+
+
+<input type="text" id="name">
+<input type="text" id="url">
+<button onclick="page.addCard()">ADD</button>
+<ul class="gallary_list"></ul>
+</body>
+</html>
